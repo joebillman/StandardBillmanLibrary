@@ -14,6 +14,8 @@
 * 
 * //REVISION NOTES:
 *
+*	6/11/2014 - Added calcPPI function
+*
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 package com.joebillman.math
 {
@@ -36,6 +38,27 @@ package com.joebillman.math
 		{
 			var A:Number = P*((r*(Math.pow((1+r), n))) / ((Math.pow((1+r), n)-1)));
 			return("$ "+A.toFixed(2));
+		}
+		
+		/**
+		 * 
+		 * @param 	hPixels		Horizontal pixels (resolutionX width)
+		 * @param 	vPixels		Vertical pixels (resolutionY height)
+		 * @param 	diagSize	Diagonal size (screen size)
+		 * @param 	round		Whether to round the result
+		 * @return 	Number		Resulting PPI
+		 * 
+		 */		
+		public static function calcPPI(hPixels:Number, vPixels:Number, diagSize:Number, round:Boolean=true):Number
+		{
+			if(round)
+			{
+				return Math.round(Math.sqrt(Math.pow(hPixels, 2)+Math.pow(vPixels, 2))/diagSize);
+			}
+			else
+			{
+				return Math.sqrt(Math.pow(hPixels, 2)+Math.pow(vPixels, 2))/diagSize;
+			}
 		}
 		
 	}
