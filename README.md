@@ -1,4 +1,4 @@
-standard-billman-library-as3
+StandardBillmanLibrary
 ============================
 
 Library of ActionScript classes that I've developed over the years.
