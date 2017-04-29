@@ -12,7 +12,7 @@ package com.joebillman.utils
 	import flash.utils.Timer;
 	
 	/**
-	 * Delay: 
+	 * Delay: This class is helpful for calling functions after a certain period of time.
 	 *
 	 *
 	 */
