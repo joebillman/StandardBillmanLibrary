@@ -3,60 +3,142 @@
 	
 	public class TimeFormatter
 	{
-		public static function milliToMinAndSec(val:uint):String
+		private static const MS_IN_HR:Number = 3600000;
+		private static const MS_IN_MIN:Number = 60000;
+		private static const MS_IN_SEC:Number = 1000;
+		
+		public static function milliToHrAndMin(val:Number):String
 		{
-			var time_str:String = "";
-			var min:int = Math.floor(val / 1000 / 60);
-			var sec:int = (Math.floor(val / 1000) % 60);
-			time_str += (min < 10)? 0+min.toString():min.toString();
-			time_str += ":";
-			time_str += (sec < 10)?0+sec.toString():sec.toString();
+			var formattedTime:String = "";
+			var hr:Number = Math.floor(val / MS_IN_HR);
+			var min:Number = Math.floor((val % MS_IN_HR) / MS_IN_MIN);
 			
-			return time_str;
+			if(hr < 10)
+			{
+				formattedTime += "0"+hr.toString();
+			}
+			else
+			{
+				formattedTime += hr.toString();
+			}
+			formattedTime += ":";
+			if(min < 10)
+			{
+				formattedTime += "0"+min.toString();
+			}
+			else
+			{
+				formattedTime += min.toString();
+			}
+			
+			return formattedTime;
 		}
 		
-		public static function secToMinAndSec(val:uint):String
+		public static function milliToHrAndMinAndSec(val:Number):String
 		{
-			var min:uint;
-			var minTime:String;
-			var sec:uint;
-			var secTime:String;
+			var formattedTime:String = "";
+			var hr:Number = Math.floor(val / MS_IN_HR);
+			var min:Number = Math.floor((val % MS_IN_HR) / MS_IN_MIN);
+			var sec:Number = Math.floor(((val % MS_IN_HR) % MS_IN_MIN) / MS_IN_SEC);
+			
+			if(hr < 10)
+			{
+				formattedTime += "0"+hr.toString();
+			}
+			else
+			{
+				formattedTime += hr.toString();
+			}
+			formattedTime += ":";
+			if(min < 10)
+			{
+				formattedTime += "0"+min.toString();
+			}
+			else
+			{
+				formattedTime += min.toString();
+			}
+			formattedTime += ":";
+			if(sec < 10)
+			{
+				formattedTime += "0"+sec.toString();
+			}
+			else
+			{
+				formattedTime += sec.toString();
+			}
+			
+			return formattedTime;
+		}
+		
+		public static function milliToMinAndSec(val:Number):String
+		{
+			var formattedTime:String = "";
+			var min:Number = Math.floor(val / MS_IN_MIN);
+			var sec:Number = Math.floor((val % MS_IN_MIN) / MS_IN_SEC);
+			
+			if(min < 10)
+			{
+				formattedTime += "0"+min.toString();
+			}
+			else
+			{
+				formattedTime += min.toString();
+			}
+			formattedTime += ":";
+			if(sec < 10)
+			{
+				formattedTime += "0"+sec.toString();
+			}
+			else
+			{
+				formattedTime += sec.toString();
+			}
+			
+			return formattedTime;
+		}
+		
+		public static function secToMinAndSec(val:Number):String
+		{
+			var formattedTime:String = "";
+			var min:Number;
+			var sec:Number;
 			
 			min = val/60;
 			sec = val%60;
 			
 			if(min < 10)
 			{
-				minTime = "0"+min.toString();
+				formattedTime += "0"+min.toString();
 			}
 			else
 			{
-				minTime = min.toString();
+				formattedTime += min.toString();
 			}
-			
+			formattedTime += ":";
 			if(sec < 10)
 			{
-				secTime = "0"+sec.toString();
+				formattedTime += "0"+sec.toString();
 			}
 			else
 			{
-				secTime = sec.toString();
+				formattedTime += sec.toString();
 			}
 			
-			return minTime+":"+secTime;
+			return formattedTime;
 		}
 		
-		public static function minAndSecToSec(val:String):uint
+		public static function minAndSecToSec(val:String):Number
 		{
-			var min:uint;
+			var min:Number;
 			var minTime:String;
-			var sec:uint;
+			var sec:Number;
 			var secTime:String;
 			
 			minTime = val.substring(0, val.indexOf(":"));
 			secTime = val.substr(val.indexOf(":")+1);
-			min = uint(minTime)*60;
-			sec = uint(secTime);
+			min = Number(minTime)*60;
+			sec = Number(secTime);
 			
 			return min+sec;
 		}
